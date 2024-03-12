@@ -9,7 +9,7 @@ namespace MDT_Romania.Models
         public DateTime LastSeen { get; set; }
         public string Description { get; set; }
 
-        public string UserId { get; set; }
+        public string ?UserId { get; set; }
         public virtual ApplicationUser? User { get; set; }
 
         public int VehicleId { get; set; }
