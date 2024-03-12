@@ -13,11 +13,12 @@ namespace MDT_Romania.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateOnly DateOfBirth { get; set; }
-
+        public string Gender { get; set; }
+        public string CitizenId { get; set; }
 
         public string Job { get; set; } = "Somer";
         public string? Information { get; set; }
-        public int AddressId { get; set; }
+        public int ?AddressId { get; set; }
         public virtual Address? Address { get; set; }
         public virtual ICollection<Raport>? Raports { get; set; }
         public virtual ICollection<Vehicle>? Vehicles { get; set; }
@@ -35,7 +36,7 @@ namespace MDT_Romania.Models
                 return ImgSrc;
 
             }
-            return "/img/default.png";
+            return "~/img/default.png";
 
         }
         

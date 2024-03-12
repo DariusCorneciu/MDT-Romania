@@ -31,6 +31,33 @@ namespace MDT_Romania.Controllers
             return View();
         }
 
+        public IActionResult Show(int id)
+        {
+            Civilian returnedCivilian = db.Civilians.Find(id);
+             return View(returnedCivilian);
+            
+        }
+        public IActionResult New()
+        {
+            Civilian civilian = new Civilian();
+            return View( civilian );
+
+
+        }
+        [HttpPost]
+        public IActionResult New(Civilian civilian)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Civilians.Add( civilian );
+                db.SaveChanges();
+                return Redirect("Home/Index");
+            }
+            else
+            {
+                return View( civilian );
+            }
+        }
      
     }
 }
