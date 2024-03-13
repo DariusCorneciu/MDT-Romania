@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -17,9 +17,8 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
+
+
 
 .grid-container {
     display: grid;
@@ -30,7 +29,7 @@ body {
 
 
 .item {
-    background-color:white;
+    
     padding: 20px;
     font-size: 24px;
     
@@ -48,20 +47,396 @@ body {
 }
 
 .note {
-    font-size:16px;
-    color: #000;
+    font-size: 16px;
     background: #fff;
     display: block;
-    height: 5em;
+    height: 6em;
+    width: 22.5em;
     padding: 1em;
-    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    
 }
+
 .convic {
     font-size: 16px;
-    color: #000;
-   
+    
     display: block;
-    height: 11em;
+    height: 7em;
     padding: 1em;
 
 }
+th:first-child {
+    width: 1%; /* Poți ajusta acest număr pentru a controla lățimea */
+    white-space: nowrap; /* Evită ruperea textului pe mai multe linii */
+}
+
+/* The switch - the box around the slider */
+.switch {
+    display: block;
+    --width-of-switch: 3.5em;
+    --height-of-switch: 1.6em;
+    /* size of sliding icon -- sun and moon */
+    --size-of-icon: 1.2em;
+    /* it is like a inline-padding of switch */
+    --slider-offset: 0.3em;
+    position: relative;
+    width: var(--width-of-switch);
+    height: var(--height-of-switch);
+}
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 7px;
+    left: 0;
+    right: 0;
+    bottom: -7px;
+    background-color: #f4f4f5;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: var(--size-of-icon,1.4em);
+        width: var(--size-of-icon,1.4em);
+        border-radius: 20px;
+        left: var(--slider-offset,0.3em);
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+        ;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #303136;
+}
+
+    input:checked + .slider:before {
+        left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+        background: #303136;
+        /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+        box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+    }
+
+
+/*Searh mini profile*/
+.card {
+    overflow: visible;
+    border:none;
+    width: 250px;
+    height: 300px;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+   
+    transform-style: preserve-3d;
+    transition: transform 300ms;
+    box-shadow: 0px 0px 10px 1px #000000ee;
+    border-radius: 5px;
+}
+
+.front, .back {
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.back {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+    .back::before {
+        position: absolute;
+        content: ' ';
+        display: block;
+        width: 160px;
+        height: 160%;
+        background: linear-gradient(90deg, transparent, red, blue, blue, red, transparent);
+        animation: rotation_481 5000ms infinite linear;
+    }
+
+.back-content {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.card:hover .content {
+    transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    0% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.front {
+    transform: rotateY(180deg);
+    color: white;
+}
+
+    .front .front-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+.front-content .badge {
+    background-color: #00000055;
+    color: red;
+    padding: 2px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(2px);
+    width: fit-content;
+}
+.front-content .badge2 {
+   
+    color: green;
+  
+}
+
+.description {
+    box-shadow: 0px 0px 10px 5px #00000088;
+    width: 100%;
+    padding: 10px;
+    background-color: #00000099;
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 11px;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .title p {
+        width: 50%;
+    }
+
+.card-footer {
+    color: #ffffff88;
+    margin-top: 5px;
+    font-size: 8px;
+}
+
+.front .img {
+    position: absolute;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.circle {
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+    position: relative;
+}
+
+#bottom {
+    background-color: red;
+    left: 50px;
+    top: 0px;
+    width: 150px;
+    height: 150px;
+    animation-delay: -800ms;
+}
+
+#right {
+    background-color: #ff2233;
+    left: 160px;
+    top: -80px;
+    width: 30px;
+    height: 30px;
+    animation-delay: -1800ms;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+.Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 1.5em;
+    height: 1.5em;
+    border: none;
+    border-radius: 40%;
+    cursor: pointer;
+    position: relative;
+    top: 7px;
+    bottom: -7px;
+    overflow: hidden;
+    transition-duration: 0.4s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: cadetblue;
+}
+
+.sign {
+    width: 100%;
+    transition-duration: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .sign svg {
+        width: 17px;
+    }
+
+        .sign svg path {
+            fill: white;
+        }
+
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: #ecf0f1;
+    font-size: 0.8em;
+    font-weight: 600;
+    transition-duration: 0.4s;
+}
+
+.Btn:hover {
+    width: 100px;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+    background-color: cadetblue;
+}
+
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: 0.4s;
+        padding-left: 12px;
+    }
+
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: 0.4s;
+        padding-right: 10px;
+    }
+
+.Btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Note that you only needs to edit the config to customize the button! */
+
+.plusButton {
+    /* Config start */
+    --plus_sideLength: 1.5rem;
+    --plus_topRightTriangleSideLength: 0.3rem;
+    /* Config end */
+    position: relative;
+    display: flex;
+    border-radius:50%;
+    justify-content: center;
+    align-items: center;
+    
+    width: var(--plus_sideLength);
+    height: var(--plus_sideLength);
+    background-color: cadetblue;
+    overflow: hidden;
+}
+
+    .plusButton::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+        border-style: solid;
+        border-color: transparent limegreen transparent transparent;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.2s;
+    }
+
+    .plusButton:hover {
+        cursor: pointer;
+    }
+
+        .plusButton:hover::before {
+            --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+        }
+
+    .plusButton:focus-visible::before {
+        --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+    }
+
+    .plusButton > .plusIcon {
+        fill: white;
+        width: calc(var(--plus_sideLength) * 0.7);
+        height: calc(var(--plus_sideLength) * 0.7);
+        z-index: 1;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.2s;
+    }
+
+    .plusButton:hover > .plusIcon {
+        fill: black;
+        transform: rotate(180deg);
+    }
+
+    .plusButton:focus-visible > .plusIcon {
+        fill: black;
+        transform: rotate(180deg);
+    }

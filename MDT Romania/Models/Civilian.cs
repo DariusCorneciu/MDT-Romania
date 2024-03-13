@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,12 +11,20 @@ namespace MDT_Romania.Models
         [Key]
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="First name is mandatory")]
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateOnly DateOfBirth { get; set; }
-        public string Gender { get; set; }
-        public string CitizenId { get; set; }
 
+        [Required(ErrorMessage = "Last name is mandatory")]
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "D.O.B is mandatory")]
+       
+       
+        public DateTime DateOfBirth { get; set; }
+        [Required(ErrorMessage = "Gender is mandatory")]
+        public string Gender { get; set; }
+        [Required(ErrorMessage = "CitizenId is mandatory")]
+        public string CitizenId { get; set; }
+        
         public string Job { get; set; } = "Somer";
         public string? Information { get; set; }
         public int ?AddressId { get; set; }
@@ -36,9 +45,20 @@ namespace MDT_Romania.Models
                 return ImgSrc;
 
             }
-            return "~/img/default.png";
+            return "/img/default.jpg";
 
         }
-        
+        public bool ActiveWarrant()
+        {
+            if(Raports == null) { return false; }
+
+            if(Raports.Where(i=>i.Type == 2).Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        [NotMapped]
+        public IEnumerable<SelectListItem>? selectAddress { get; set; }
     }
 }

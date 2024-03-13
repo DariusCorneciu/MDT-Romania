@@ -1,0 +1,30 @@
+﻿<form class="d-flex" method="GET">
+    <input class="form-control me-2" type="search" placeholder="@ViewBag.SearchString" aria-label="Search" name="civsearch">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+@if (ViewBag.NotFound)
+{
+    <div class="container d-flex justify-content-start gap-3 mt-3">
+    <p >We didn't find the suspect you are looking for. You can add them by pressing this button </p>
+        <a tabindex="0" class="plusButton" href="/Civilians/New">
+            <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                <g mask="url(#mask0_21_345)">
+                    <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z"></path>
+                </g>
+            </svg>
+        </a>
+    </div>
+}
+<div class="container d-flex justify-content-center mt-5 gap-5 row row-cols-auto ">
+
+    @if (ViewBag.Civilians!=null)
+    {
+        @foreach (MDT_Romania.Models.Civilian civilian in ViewBag.Civilians)
+        {
+            @Html.Partial("_CivilCard", civilian)
+            ;
+        }
+    }
+</div>
+

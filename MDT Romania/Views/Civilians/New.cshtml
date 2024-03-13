@@ -1,0 +1,78 @@
+﻿@model MDT_Romania.Models.Civilian
+
+@{
+    var minDate = new DateOnly(1930, 01, 01);
+        var maxDate = new DateOnly(2023, 12, 31);
+}
+
+<form method="post" action="/Civilians/New">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+        <div class="col">
+            
+            <div data-mdb-input-init class="form-outline">
+                @Html.ValidationMessage("FirstName", null, new { @class = "text-danger" })
+                <input type="text" id="form6Example1" class="form-control" name="FirstName" value="@Model.FirstName" />
+                <label class="form-label" for="form6Example1">First name</label>
+                
+            </div>
+        </div>
+        <div class="col">
+            <div data-mdb-input-init class="form-outline"> 
+                @Html.ValidationMessage("LastName", null, new { @class = "text-danger" })
+                <input type="text" id="form6Example2" class="form-control" name="LastName" value="@Model.LastName" />
+                <label class="form-label" for="form6Example2">Last name</label>
+            </div>
+        </div>
+
+    </div>
+    <div data-mdb-input-init class="form-outline">
+        @Html.ValidationMessage("CitizenId", null, new { @class = "text-danger" })
+        <input type="text" id="form6Example2" class="form-control" name="CitizenId" value="@Model.CitizenId" />
+        <label class="form-label" for="form6Example2">Citizen Identification Number</label>
+    </div>
+    <!-- Text input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("AddressId", null, new { @class = "text-danger" })
+        <select class="form-select" id="inlineFormSelectPref" name="AddressId" >
+            <option selected value= NULL>Address</option>
+            
+            @foreach (var adr in Model.selectAddress)
+            {
+                <option value="@adr.Value"> @adr.Text </option>
+            }
+        </select>
+    </div>
+
+    <!-- Text input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("Gender", null, new { @class = "text-danger" })
+        <select class="form-select" id="inlineFormSelectPref" name="Gender">
+           <option selected value="Male">Male</option>
+            <option value="Female">Female</option>
+
+          
+        </select>
+    </div>
+
+    <!-- Email input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("Job", null, new { @class = "text-danger" })
+        <input type="text" id="form6Example1" class="form-control" name="Job" value="@Model.Job" />
+        <label class="form-label" for="form6Example1">Occupation</label>
+    </div>
+
+    <!-- Number input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("DateOfBirth", null, new { @class = "text-danger" })
+        <input type="date" class="form-control" name="DateOfBirth" value="@Model.DateOfBirth">
+    </div>
+
+    <!-- Message input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <textarea class="form-control" id="form6Example7" rows="4" name="Information">@Model.Information</textarea>
+        <label class="form-label" for="form6Example7">Information</label>
+    </div>
+
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Add Citizen</button>
+</form>

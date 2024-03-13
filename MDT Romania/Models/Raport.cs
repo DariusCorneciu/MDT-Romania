@@ -8,7 +8,7 @@ namespace MDT_Romania.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int Type { get; set; }
+        public int Type { get; set; } /// 0->amenda 1->dosar penal 2->mandat
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
