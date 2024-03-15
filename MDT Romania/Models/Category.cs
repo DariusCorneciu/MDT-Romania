@@ -7,6 +7,6 @@ namespace MDT_Romania.Models
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }
-        public virtual ICollection<Crime> Crimes { get; set; } = new List<Crime>();
+        public virtual ICollection<Crime> ?Crimes { get; set; }
     }
 }

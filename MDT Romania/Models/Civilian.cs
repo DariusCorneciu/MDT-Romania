@@ -11,14 +11,12 @@ namespace MDT_Romania.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="First name is mandatory")]
+        [Required(ErrorMessage = "First name is mandatory")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is mandatory")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "D.O.B is mandatory")]
-       
-       
         public DateTime DateOfBirth { get; set; }
         [Required(ErrorMessage = "Gender is mandatory")]
         public string Gender { get; set; }
@@ -36,29 +34,33 @@ namespace MDT_Romania.Models
         public byte[]? Photo { get; set; }
         public string? PhotoType { get; set; }
 
+
+        [NotMapped]
+        public IEnumerable<SelectListItem>? SelectAddress { get; set; }
+
+
         public string ImageSource()
         {
             if (Photo != null)
             {
                 var Base64 = Convert.ToBase64String(Photo);
-                string ImgSrc = $"data:{PhotoType};base64:{Base64}";
+                string ImgSrc = $"data:{PhotoType};base64,{Base64}";
                 return ImgSrc;
 
             }
             return "/img/default.jpg";
 
         }
+
         public bool ActiveWarrant()
         {
-            if(Raports == null) { return false; }
+            if (Raports == null) { return false; }
 
-            if(Raports.Where(i=>i.Type == 2).Count() > 0)
+            if (Raports.Where(i => i.Type == 2).Count() > 0)
             {
                 return true;
             }
             return false;
         }
-        [NotMapped]
-        public IEnumerable<SelectListItem>? selectAddress { get; set; }
     }
 }

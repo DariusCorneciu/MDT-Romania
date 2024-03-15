@@ -21,9 +21,7 @@
     @if (ViewBag.Civilians!=null)
     {
         @foreach (MDT_Romania.Models.Civilian civilian in ViewBag.Civilians)
-        {
-            @Html.Partial("_CivilCard", civilian)
-            ;
+        {            @Html.Partial("_CivilCard", civilian);
         }
     }
 </div>

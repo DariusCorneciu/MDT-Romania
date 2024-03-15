@@ -1,0 +1,89 @@
+﻿@{
+    // Datele pentru fiecare raport
+    var modelDates = new List<DateTime>();
+}
+
+<script>
+    // Funcție pentru afișarea indicatorului de încărcare
+    function showLoading() {
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('tabelul').style.display = 'none';
+    }
+
+    // Funcție pentru ascunderea indicatorului de încărcare și actualizarea diferențelor de timp
+    function hideLoadingAndUpdate() {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('tabelul').style.display = 'block';
+        updateDateDifferences();
+    }
+
+    function updateDateDifferences() {
+        var currentDate = new Date();
+
+        // Iterăm prin fiecare dată și calculăm diferența de timp
+        var dateDifferenceElements = document.querySelectorAll('.dateDifference');
+        dateDifferenceElements.forEach(function (dateDifferenceElement) {
+            var modelDate = new Date(dateDifferenceElement.getAttribute('data-model-date'));
+            modelDate.setDate(modelDate.getDate() + 30);
+            var differenceInSeconds = (modelDate - currentDate) / 1000;
+
+            // Convertim diferența într-un format ușor de citit
+            var differenceString = formatDifference(differenceInSeconds);
+
+            // Actualizăm textul pentru fiecare element <td> corespunzător raportului
+            dateDifferenceElement.textContent = differenceString;
+        });
+    }
+
+    // Funcția pentru formatul diferenței de timp
+    function formatDifference(differenceInSeconds) {
+        var days = Math.floor(differenceInSeconds / (3600 * 24));
+        var hours = Math.floor((differenceInSeconds % (3600 * 24)) / 3600);
+        var minutes = Math.floor((differenceInSeconds % 3600) / 60);
+        var seconds = Math.floor(differenceInSeconds % 60);
+
+        var differenceString = days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+        return differenceString;
+    }
+
+    // Actualizarea diferențelor la încărcarea paginii
+    window.onload = function () {
+        showLoading();
+        setTimeout(hideLoadingAndUpdate, 2000); // Simulează o întârziere de 2 secunde, înlocuiește cu timpul real de încărcare
+    };
+</script>
+
+<!-- Indicator de încărcare -->
+<div id="loading" style="display: none;">
+    <div class="loader3">
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+        <div class="circle1"></div>
+    </div>
+
+
+</div>
+
+<table class="table" id="tabelul">
+    <thead>
+        <tr>
+            <th scope="col">Officer Name</th>
+            <th scope="col">Warrant Title</th>
+            <th scope="col">Suspect</th>
+            <th scope="col">Expire Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MDT_Romania.Models.Raport raport in ViewBag.warrants)
+        {
+            <tr>
+                <td>@raport.User.FirstName @raport.User.LastName</td>
+                <td>@raport.Name</td>
+                <td>@raport.Civilian.FirstName @raport.Civilian.LastName</td>
+                <td class="dateDifference" data-model-date="@raport.Date.ToString("yyyy-MM-ddTHH:mm:ss")"></td>
+            </tr>
+        }
+    </tbody>
+</table>

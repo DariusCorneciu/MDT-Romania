@@ -1,0 +1,96 @@
+﻿@model MDT_Romania.Models.Raport
+@{
+    var totaljail = 0;
+    var toatalfine = 0;
+   
+}
+
+
+<div class="grid-container">
+
+
+    <div class=" item info  d-flex flex-column  align-items-center justify-content-cente gap-1">
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Title</p>
+            <p class="card-text">@Model.Name</p>
+        </div>
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Description</p>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Date</p>
+            <p class="card-text">@Model.Date.ToString("dd-MM-yyyy")</p>
+        </div>
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Type</p>
+            @if(Model.Type == 1)
+            {
+                <p class="card-text fw-bold" style="color:green">Criminal File</p>
+            }else{
+                <p class="card-text  fw-bold" style="color:firebrick">Warrant</p>
+            }
+            
+        </div>
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Created By</p>
+          
+            <p class="card-text">s</p>
+        </div>
+     </div>
+    <div class="item photo d-flex flex-column  justify-content-center">
+        <img src="@Model.Civilian.ImageSource()" class="img-fluid mb-4 w-75" alt="...">
+        <a href="/Civilians/Show/@Model.CivilianId" class=" btn card convic overflow-auto w-75 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Suspect Name</p>
+
+            <p class="card-text">@Model.Civilian.FirstName @Model.Civilian.LastName</p>
+        </a>
+        
+    </div>
+
+
+
+    <div class="item conviction">
+        <table class="table table-bordered " style="font-size:16px">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="2">Charges</th>
+
+                </tr>
+            </thead>
+        </table>
+        <div class="overflow-auto bg-body w-100 convic">
+            <table class="table table-bordered">
+                <tbody>
+
+                    @foreach (Crime charges in ViewBag.crimes)
+                    {
+                        <tr>
+                            <td>@charges.Name</td>
+                            <td>@charges.Jail years</td>
+                            <td>@charges.Fine $</td>
+                        </tr>
+                        
+                        totaljail += charges.Jail;
+                        toatalfine += charges.Fine;
+                    }
+
+
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+        <p class="m-2">Total:</p>
+        <p id="dateDifference"></p>
+        <span class="badge text-bg-success ">@toatalfine $</span>
+        <span class="badge text-bg-primary">@totaljail years</span>
+
+
+    </div>
+
+</div>
+

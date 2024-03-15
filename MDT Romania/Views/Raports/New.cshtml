@@ -1,0 +1,74 @@
+﻿@model MDT_Romania.Models.Raport
+
+
+<form method="post" action="/Raports/New">
+    <div class="formular-grid">
+        <div class="raport">
+           <div data-mdb-input-init class="form-outline">
+                @Html.ValidationMessage("Name", null, new { @class = "text-danger" })
+                <input type="text" id="form6Example1" class="form-control" name="Name" value="@Model.Name" />
+                <label class="form-label" for="form6Example1">Title</label>
+
+            </div>
+
+    <div data-mdb-input-init class="form-outline mb-4">
+        <textarea class="form-control" id="form6Example7" rows="4" name="Description">@Model.Description</textarea>
+        <label class="form-label" for="form6Example7">Description</label>
+    </div>
+
+    <!-- Text input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("CivilianId", null, new { @class = "text-danger" })
+        <select class="form-select" id="inlineFormSelectPref" name="CivilianId">
+            <option selected value=NULL>Select Suspect</option>
+            @if (Model.SelectCivilian != null)
+            {
+                @foreach (var adr in Model.SelectCivilian)
+                {
+                    <option value="@adr.Value"> @adr.Text </option>
+                }}
+        </select>
+    </div>
+
+    <!-- Text input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("Type", null, new { @class = "text-danger" })
+        <label class="form-label" for="inlineFormSelectPref">Type</label>
+        <select class="form-select" id="inlineFormSelectPref" name="Type">
+            <option selected value=2>Warrant</option>
+            <option value=1>Criminal File</option>
+
+
+        </select>
+    </div>
+
+    <!-- Email input -->
+
+        </div>
+        <div class="crime d-flex flex-column row-cols-2 align-items-center justify-content-center  ">
+
+            @Html.ValidationMessage("NoCrime", null, new { @class = "text-danger" })
+
+
+            @foreach (MDT_Romania.Models.Category categ in ViewBag.CategCrime)
+            {
+                <button type="button" class="btn btn-outline-primary btn-sm m-2" data-bs-toggle="collapse" data-bs-target="#postContent_intrebare.Id.@categ.Id"
+                        aria-expanded="false" aria-controls="postContent_intrebare.Id.@categ.Id">
+                    @categ.Title
+                </button>
+
+                <div class="collapse " id="postContent_intrebare.Id.@categ.Id">
+                    @foreach (MDT_Romania.Models.Crime crime in categ.Crimes)
+                    {
+                        <input class="form-check-input me-1" type="checkbox" name="crimelist" value="@crime.Id" id="Checkbox_@crime.Id">
+                        <label class="form-check-label" for="Checkbox_@crime.Id"> @crime.Name</label>
+                    }
+                </div>
+            }
+
+        </div>
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    </div>
+
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4 mt-4">Create Rapport</button>
+</form>

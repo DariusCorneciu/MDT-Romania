@@ -5,7 +5,8 @@
         var maxDate = new DateOnly(2023, 12, 31);
 }
 
-<form method="post" action="/Civilians/New">
+<form method="post" action="/Civilians/New" enctype="multipart/form-data">
+   
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row mb-4">
         <div class="col">
@@ -36,11 +37,11 @@
         @Html.ValidationMessage("AddressId", null, new { @class = "text-danger" })
         <select class="form-select" id="inlineFormSelectPref" name="AddressId" >
             <option selected value= NULL>Address</option>
-            
-            @foreach (var adr in Model.selectAddress)
+            @if (Model.SelectAddress != null) { 
+            @foreach (var adr in Model.SelectAddress)
             {
                 <option value="@adr.Value"> @adr.Text </option>
-            }
+                }}
         </select>
     </div>
 
@@ -54,7 +55,12 @@
           
         </select>
     </div>
-
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("Imagine", null, new { @class = "text-danger" })
+       
+        <input class="form-control" type="file" id="formFile" name="Imagine">
+        <label for="formFile" class="form-label">Profile Picture</label>
+    </div>
     <!-- Email input -->
     <div data-mdb-input-init class="form-outline mb-4">
         @Html.ValidationMessage("Job", null, new { @class = "text-danger" })

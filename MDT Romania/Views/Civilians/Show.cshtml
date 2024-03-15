@@ -123,13 +123,14 @@
 
         </div>
      </div>
-    <div class="item photo ">
-        <img src=@Model.ImageSource() class="img-fluid mb-4 " alt="...">
-        
-        <div class="overflow-auto p-3  mb-md-0 me-md-3 bg-body-tertiary border border-2 note">
+    <div class="item photo d-flex flex-column align-items-center justify-content-center">
+        <img src="@Model.ImageSource()" class="img-fluid mb-4" alt="...">
+
+        <div class="overflow-auto p-3 mb-md-0 me-md-3 bg-body-tertiary border border-2 note2">
             <p style="font-size:10px;">Note</p>
             @Model.Information
         </div>
+        
     </div>
 
     <div class="item conviction">
@@ -144,34 +145,18 @@
         <div class="overflow-auto bg-body w-100 convic">
             <table class="table table-bordered">
                 <tbody>
-                    <tr>
-                        <th scope="row">x3</th>
-                        <td >Art.1 Termenul de supraveghere este de 2 ani și se calculează de la data rămânerii definitive a hotărârii prin care s-a dispus amânarea aplicării pedepsei.</td>
+                   
+                        @foreach (SelectListItem convicitons in ViewBag.Convicitions)
+                        {
+                        <tr>
+                            <th scope="row">x @convicitons.Value</th>
+                            <td>@convicitons.Text</td>
+                             </tr>
+                        }
                         
                         
                     </tr>
-                    <tr>
-                        <th scope="row">x2</th>
-                        <td scope="row">Art.1 Termenul de supraveghere este de 2 ani și se calculează de la data rămânerii definitive a hotărârii prin care s-a dispus amânarea aplicării pedepsei.</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">x2</th>
-                        <td scope="row">Art.1 Termenul de supraveghere este de 2 ani și se calculează de la data rămânerii definitive a hotărârii prin care s-a dispus amânarea aplicării pedepsei.</td>
-
-                    </tr>
-
-                    <tr>
-                        <th scope="row">x2</th>
-                        <td scope="row">Art.1 Termenul de supraveghere este de 2 ani și se calculează de la data rămânerii definitive a hotărârii prin care s-a dispus amânarea aplicării pedepsei.</td>
-
-                    </tr>
-
-                    <tr>
-                        <th scope="row">x2</th>
-                        <td scope="row">Art.1 Termenul de supraveghere este de 2 ani și se calculează de la data rămânerii definitive a hotărârii prin care s-a dispus amânarea aplicării pedepsei.</td>
-
-                    </tr>
+                    
 
 
                 </tbody>

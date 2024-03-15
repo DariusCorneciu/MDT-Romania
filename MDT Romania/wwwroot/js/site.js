@@ -31,4 +31,3 @@ const darkModeToggle = document.getElementById('darkModeToggle');
     htmlTag.setAttribute('data-bs-theme', 'dark');
 }
 
-

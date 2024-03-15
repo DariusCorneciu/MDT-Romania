@@ -2,7 +2,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav bg-body-tertiary gap-3 ">
+<ul class="navbar-nav bg-body-secondary gap-3 ">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">

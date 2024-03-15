@@ -21,6 +21,25 @@ namespace MDT_Romania.Models
                     return;   // baza de date contine deja roluri
                 }
 
+                if (!context.Categories.Any())
+                {
+                    context.Categories.AddRange(
+                    new Category { Title = "Crime Împotriva unei Persoane" },
+                    new Category { Title = "Crime Împotriva unei Proprietăți" },
+                    new Category { Title = "Crime Împotriva Integritatii Fizice" },
+                    new Category { Title = "Crime Împotriva Demnității Publice" },
+                    new Category { Title = "Infractiuni de audienta" },
+                    new Category { Title = "Crime Împotriva Liniștii Publice" },
+                    new Category { Title = "Crime Împotriva Siguranței Publice" },
+                    new Category { Title = "Traffic Violation" },
+                    new Category { Title = "Controlul Armelor și Echipamentului Mortal" },
+                    new Category { Title = "Legislaţia rutieră" },
+                    new Category { Title = "State Code Violations" }
+                    );
+                    context.SaveChanges();
+
+                }
+
                 // CREAREA ROLURILOR IN BD
                 // daca nu contine roluri, acestea se vor crea
                 context.Roles.AddRange(
