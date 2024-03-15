@@ -20,7 +20,8 @@ namespace MDT_Romania.Data
         public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet <Address> Addresses { get; set; }
         public DbSet<CrimeRaport> CrimeRaports { get; set; }
-
+        public DbSet<Licence> Licences { get; set; }
+        public DbSet<CivilianLicence> CivilianLicences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder
 modelBuilder)
@@ -28,19 +29,38 @@ modelBuilder)
             base.OnModelCreating(modelBuilder);
             // definire primary key compus
             modelBuilder.Entity<CrimeRaport>()
-            .HasKey(cr => new {
-                cr.RaportId,cr.CrimeId
+            .HasKey(cr => new
+            {
+                cr.RaportId,
+                cr.CrimeId
             });
             // definire relatii cu modelele Crime si Raport (FK)
             modelBuilder.Entity<CrimeRaport>()
-            .HasOne(ab => ab.Raport)
-            .WithMany(ab => ab.CrimeRaports)
-            .HasForeignKey(ab => ab.RaportId);
+           .HasOne(ab => ab.Raport)
+           .WithMany(ab => ab.CrimeRaports)
+           .HasForeignKey(ab => ab.RaportId);
             modelBuilder.Entity<CrimeRaport>()
             .HasOne(ab => ab.Crime)
             .WithMany(ab => ab.CrimeRaports)
             .HasForeignKey(ab => ab.CrimeId);
+
+            modelBuilder.Entity<CivilianLicence>()
+            .HasKey(cr => new {
+                cr.LicenceId,
+            });
+            // definire relatii cu modelele Civilian si Licence (FK)
+
+
+            modelBuilder.Entity<CivilianLicence>()
+           .HasOne(ab => ab.Civilian)
+           .WithMany(ab => ab.CivilianLicence)
+           .HasForeignKey(ab => ab.CivilianId);
+            modelBuilder.Entity<CivilianLicence>()
+            .HasOne(ab => ab.Licence)
+            .WithMany(ab => ab.CivilianLicence)
+            .HasForeignKey(ab => ab.LicenceId);
         }
 
+       
     }
 }

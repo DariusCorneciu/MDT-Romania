@@ -30,4 +30,22 @@ const darkModeToggle = document.getElementById('darkModeToggle');
     darkModeToggle.checked = true;
     htmlTag.setAttribute('data-bs-theme', 'dark');
 }
+$("#container").on('click-row.bs.table', function (e, row, $element) {
+    window.location = $element.data('href');
+});
 
+function redirectOnChange(selectElement) {
+    var selectedValue = selectElement.value;
+
+    if (selectedValue.charAt(0) === "/") { // am generalizat pentru a putea sa folosesc functia si in alte locuri(daca am nevoie de ea)
+        window.location.href = selectedValue;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', e => {
+    $('#input-datalist').autocomplete()
+}, false);
+
+document.addEventListener('DOMContentLoaded', e => {
+    $('#input-datalist2').autocomplete()
+}, false);

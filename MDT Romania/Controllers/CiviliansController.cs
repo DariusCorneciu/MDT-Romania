@@ -64,7 +64,7 @@ namespace MDT_Romania.Controllers
             Civilian returnedCivilian = db.Civilians.Include(i => i.Address).Include(inc => inc.Raports).ThenInclude(inc => inc.CrimeRaports).Where(c => c.Id == id).First();
             TestExpired();
             var vieww = new List<SelectListItem>();
-            var ij = db.Crimes.Count() + 1;
+            var ij = db.Crimes.OrderBy(i=>i.Id).Last().Id + 1;
             int[] crimexnr = new int[ij+1];
             if (returnedCivilian.Raports != null)
             {

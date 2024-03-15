@@ -1,0 +1,137 @@
+﻿@model MDT_Romania.Models.Address
+<form method="post" action="/Addresses/New">
+
+
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("County", null, new { @class = "text-danger" })<div class="form-group">
+            <label for="County">County</label>
+            <input type="text" class="form-control" placeholder="County" name="County" list="list-county" id="input-datalist">
+            <datalist id="list-county">
+                <option>Alba</option>
+                <option>Arad</option>
+                <option>Argeș</option>
+                <option>Bacău</option>
+                <option>Bihor</option>
+                <option>Bistrița-Năsăud</option>
+                <option>Botoșani</option>
+                <option>Brașov</option>
+                <option>București</option>
+                <option>Brăila</option>
+                <option>Buzău</option>
+                <option>Caraș-Severin</option>
+                <option>Călărași</option>
+                <option>Cluj</option>
+                <option>Constanța</option>
+                <option>Covasna</option>
+                <option>Dâmbovița</option>
+                <option>Dolj</option>
+                <option>Galați</option>
+                <option>Giurgiu</option>
+                <option>Gorj</option>
+                <option>Harghita</option>
+                <option>Hunedoara</option>
+                <option>Ialomița</option>
+                <option>Iași</option>
+                <option>Ilfov</option>
+                <option>Maramureș</option>
+                <option>Mehedinți</option>
+                <option>Mureș</option>
+                <option>Neamț</option>
+                <option>Olt</option>
+                <option>Prahova</option>
+                <option>Satu Mare</option>
+                <option>Sălaj</option>
+                <option>Sibiu</option>
+                <option>Suceava</option>
+                <option>Teleorman</option>
+                <option>Timiș</option>
+                <option>Tulcea</option>
+                <option>Vaslui</option>
+                <option>Vâlcea</option>
+                <option>Vrancea</option>>
+            </datalist>
+        </div>
+
+          
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("City", null, new { @class = "text-danger" })<div class="form-group">
+            <label for="City">City</label>
+            <input type="text" class="form-control" placeholder="City" name="City" list="list-city" id="input-datalist2">
+            <datalist id="list-city">
+                <option>Alba Iulia</option>
+                <option>Arad</option>
+                <option>Pitești</option>
+                <option>Bacău</option>
+                <option>Oradea</option>
+                <option>Bistrița</option>
+                <option>Botoșani</option>
+                <option>Brașov</option>
+                <option>Brăila</option>
+                <option>Buzău</option>
+                <option>Reșița</option>
+                <option>Călărași</option>
+                <option>Cluj-Napoca</option>
+                <option>Constanța</option>
+                <option>Sfântu Gheorghe</option>
+                <option>Târgoviște</option>
+                <option>Craiova</option>
+                <option>Galați</option>
+                <option>Giurgiu</option>
+                <option>Târgu Jiu</option>
+                <option>Miercurea Ciuc</option>
+                <option>Deva</option>
+                <option>Slobozia</option>
+                <option>Iași</option>
+                
+                <option>Baia Mare</option>
+                <option>Drobeta-Turnu Severin</option>
+                <option>Târgu Mureș</option>
+                <option>Piatra Neamț</option>
+                <option>Slatina</option>
+                <option>Ploiești</option>
+                <option>Satu Mare</option>
+                <option>Zalău</option>
+                <option>Sibiu</option>
+                <option>Suceava</option>
+                <option>Alexandria</option>
+                <option>Timișoara</option>
+                <option>Tulcea</option>
+                <option>Vaslui</option>
+                <option>Râmnicu Vâlcea</option>
+                <option>Focșani</option>
+                <option>Sector 1</option>
+                <option>Sector 2</option>
+                <option>Sector 3</option>
+                <option>Sector 4</option>
+                <option>Sector 5</option>
+                <option>Sector 6</option>
+            </datalist>
+        </div>
+    </div>
+
+    <div data-mdb-input-init class="form-outline">
+        @Html.ValidationMessage("Street", null, new { @class = "text-danger" })
+        <label class="form-label" for="form6Example1">Street</label>
+        <input type="text" id="form6Example1" class="form-control" name="Street" value="@Model.Street" />
+    </div>
+
+    <div data-mdb-input-init class="form-outline">
+        @Html.ValidationMessage("Number", null, new { @class = "text-danger" })
+        <label class="form-label" for="form6Example1">Number</label>
+        <input type="number" id="form6Example1" class="form-control" name="Number" value="@Model.Number" />
+    </div>
+
+    <div data-mdb-input-init class="form-outline">
+        @Html.ValidationMessage("AddressLine", null, new { @class = "text-danger" })
+        <label class="form-label" for="form6Example1">AddressLine</label>
+        <input type="text" id="form6Example1" class="form-control" name="AddressLine" value="@Model.AddressLine" />
+    </div>
+
+
+      
+        
+        
+    
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4 mt-4">Add Address</button>
+</form>

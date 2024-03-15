@@ -14,7 +14,7 @@
             <p class="card-text m-0" style="font-size:10px">Title</p>
             <p class="card-text">@Model.Name</p>
         </div>
-        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+        <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:10rem;font-size:1rem">
             <p class="card-text m-0" style="font-size:10px">Description</p>
             <p class="card-text">@Model.Description</p>
         </div>
@@ -35,7 +35,7 @@
         <div class="card convic overflow-auto w-100 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
             <p class="card-text m-0" style="font-size:10px">Created By</p>
           
-            <p class="card-text">s</p>
+            <p class="card-text">@Model.User.FirstName @Model.User.LastName</p>
         </div>
      </div>
     <div class="item photo d-flex flex-column  justify-content-center">

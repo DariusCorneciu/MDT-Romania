@@ -5,6 +5,8 @@
         var maxDate = new DateOnly(2023, 12, 31);
 }
 
+
+
 <form method="post" action="/Civilians/New" enctype="multipart/form-data">
    
     <!-- 2 column grid layout with text inputs for the first and last names -->
@@ -35,13 +37,14 @@
     <!-- Text input -->
     <div data-mdb-input-init class="form-outline mb-4">
         @Html.ValidationMessage("AddressId", null, new { @class = "text-danger" })
-        <select class="form-select" id="inlineFormSelectPref" name="AddressId" >
+        <select class="form-select" id="inlineFormSelectPref" name="AddressId" onChange="redirectOnChange(this)">
             <option selected value= NULL>Address</option>
             @if (Model.SelectAddress != null) { 
             @foreach (var adr in Model.SelectAddress)
             {
-                <option value="@adr.Value"> @adr.Text </option>
+                <option  value="@adr.Value"> @adr.Text </option>
                 }}
+            <option value="/Addresses/New" >Add Address...</option>
         </select>
     </div>
 

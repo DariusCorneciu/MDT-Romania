@@ -29,6 +29,7 @@ namespace MDT_Romania.Models
         public virtual Address? Address { get; set; }
         public virtual ICollection<Raport>? Raports { get; set; }
         public virtual ICollection<Vehicle>? Vehicles { get; set; }
+        public virtual ICollection<CivilianLicence>? CivilianLicence { get; set; }
 
         /// poza de profil 
         public byte[]? Photo { get; set; }

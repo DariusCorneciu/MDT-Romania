@@ -66,11 +66,11 @@
 
 </div>
 
-<table class="table" id="tabelul">
+<table class="table table-hover" id="tabelul">
     <thead>
         <tr>
-            <th scope="col">Officer Name</th>
             <th scope="col">Warrant Title</th>
+            <th scope="col">Officer Name</th>
             <th scope="col">Suspect</th>
             <th scope="col">Expire Time</th>
         </tr>
@@ -78,12 +78,17 @@
     <tbody>
         @foreach (MDT_Romania.Models.Raport raport in ViewBag.warrants)
         {
-            <tr>
+
+            <tr  onclick="location.href='/Raports/Show/@raport.Id'" style="cursor: pointer;">
+
+                <td  >@raport.Name</td>
                 <td>@raport.User.FirstName @raport.User.LastName</td>
-                <td>@raport.Name</td>
                 <td>@raport.Civilian.FirstName @raport.Civilian.LastName</td>
                 <td class="dateDifference" data-model-date="@raport.Date.ToString("yyyy-MM-ddTHH:mm:ss")"></td>
+
             </tr>
+            
         }
     </tbody>
 </table>
+
