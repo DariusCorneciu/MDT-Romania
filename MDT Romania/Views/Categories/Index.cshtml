@@ -15,6 +15,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Fine</th>
                 <th scope="col">Jail</th>
+                <th scope="col"> </th>
                 </tr>
         </thead>
         <tbody>
@@ -25,14 +26,14 @@
                     <th scope="row">@article</th>
                     <td>@crime.Name</td>
                     <td>@crime.Description</td>
-                    <td>@crime.Fine $</td>
+                    <td>@crime.Fine$</td>
                     @if (crime.Jail == 0)
                     {
                         <td>-</td>
                     }
                     else
                     {
-                        <td>@crime.Jail years</td>
+                        <td colspan="2">@crime.Jail y</td>
                     }
                     
                 </tr>

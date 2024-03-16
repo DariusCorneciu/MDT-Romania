@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MDT_Romania.Data.Migrations
+namespace MDT_Romania.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240312181803_CitizenId_Gender")]
-    partial class CitizenId_Gender
+    [Migration("20240315131252_Db")]
+    partial class Db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -189,8 +189,8 @@ namespace MDT_Romania.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -235,6 +235,9 @@ namespace MDT_Romania.Data.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Fine")
                         .HasColumnType("int");
 
@@ -265,6 +268,42 @@ namespace MDT_Romania.Data.Migrations
                     b.HasIndex("CrimeId");
 
                     b.ToTable("CrimeRaports");
+                });
+
+            modelBuilder.Entity("MDT_Romania.Models.Licence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CivilianId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LicenceType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PermitNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Relesedby")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("subcateg")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CivilianId");
+
+                    b.ToTable("Licences");
                 });
 
             modelBuilder.Entity("MDT_Romania.Models.Raport", b =>
@@ -521,9 +560,11 @@ namespace MDT_Romania.Data.Migrations
 
             modelBuilder.Entity("MDT_Romania.Models.Crime", b =>
                 {
-                    b.HasOne("MDT_Romania.Models.Category", null)
+                    b.HasOne("MDT_Romania.Models.Category", "Category")
                         .WithMany("Crimes")
                         .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("MDT_Romania.Models.CrimeRaport", b =>
@@ -543,6 +584,17 @@ namespace MDT_Romania.Data.Migrations
                     b.Navigation("Crime");
 
                     b.Navigation("Raport");
+                });
+
+            modelBuilder.Entity("MDT_Romania.Models.Licence", b =>
+                {
+                    b.HasOne("MDT_Romania.Models.Civilian", "Civilian")
+                        .WithMany("Licences")
+                        .HasForeignKey("CivilianId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Civilian");
                 });
 
             modelBuilder.Entity("MDT_Romania.Models.Raport", b =>
@@ -651,6 +703,8 @@ namespace MDT_Romania.Data.Migrations
 
             modelBuilder.Entity("MDT_Romania.Models.Civilian", b =>
                 {
+                    b.Navigation("Licences");
+
                     b.Navigation("Raports");
 
                     b.Navigation("Vehicles");

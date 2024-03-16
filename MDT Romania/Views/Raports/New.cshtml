@@ -52,16 +52,18 @@
 
             @foreach (MDT_Romania.Models.Category categ in ViewBag.CategCrime)
             {
-                <button type="button" class="btn btn-outline-primary btn-sm m-2" data-bs-toggle="collapse" data-bs-target="#postContent_intrebare.Id.@categ.Id"
+                <button type="button" class="btn btn-outline-primary btn-sm m-2 " data-bs-toggle="collapse" data-bs-target="#postContent_intrebare.Id.@categ.Id"
                         aria-expanded="false" aria-controls="postContent_intrebare.Id.@categ.Id">
                     @categ.Title
                 </button>
 
-                <div class="collapse " id="postContent_intrebare.Id.@categ.Id">
+                <div class="collapse  row-cols-1" id="postContent_intrebare.Id.@categ.Id" style="width:25rem;">
                     @foreach (MDT_Romania.Models.Crime crime in categ.Crimes)
                     {
+                        <div class="d-flex align-items-center justify-content-center">
                         <input class="form-check-input me-1" type="checkbox" name="crimelist" value="@crime.Id" id="Checkbox_@crime.Id">
                         <label class="form-check-label" for="Checkbox_@crime.Id"> @crime.Name</label>
+                        </div>
                     }
                 </div>
             }

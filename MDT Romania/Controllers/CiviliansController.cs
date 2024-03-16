@@ -61,8 +61,26 @@ namespace MDT_Romania.Controllers
 
         public IActionResult Show(int id)
         {
-            Civilian returnedCivilian = db.Civilians.Include(i => i.Address).Include(inc => inc.Raports).ThenInclude(inc => inc.CrimeRaports).Where(c => c.Id == id).First();
+            Civilian returnedCivilian = db.Civilians.Include(i=>i.Licences).Include(i => i.Address).Include(inc => inc.Raports).ThenInclude(inc => inc.CrimeRaports).Where(c => c.Id == id).First();
             TestExpired();
+            ViewBag.DriverLicence = false;
+            ViewBag.Flying = false;
+            ViewBag.Gun = false;
+            foreach (Licence licenta in returnedCivilian.Licences)
+            {
+                if(licenta.LicenceType == 0)
+                {
+                    ViewBag.DriverLicence = true;
+                }else if(licenta.LicenceType == 1)
+                {
+                    ViewBag.Flying = true;
+                }
+                else
+                {
+                    ViewBag.Gun = true;
+                }
+            }
+             
             var vieww = new List<SelectListItem>();
             var ij = db.Crimes.OrderBy(i=>i.Id).Last().Id + 1;
             int[] crimexnr = new int[ij+1];

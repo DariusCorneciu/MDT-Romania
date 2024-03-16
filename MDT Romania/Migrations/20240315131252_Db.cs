@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MDT_Romania.Data.Migrations
+namespace MDT_Romania.Migrations
 {
     /// <inheritdoc />
-    public partial class TemporarilyMigration : Migration
+    public partial class Db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,23 +80,6 @@ namespace MDT_Romania.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Licences",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    subcateg = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PermitNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Relesedby = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LicenceType = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Licences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,25 +252,25 @@ namespace MDT_Romania.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CivilianLicences",
+                name: "Licences",
                 columns: table => new
                 {
-                    LicenceId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    subcateg = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PermitNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Relesedby = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LicenceType = table.Column<int>(type: "int", nullable: false),
                     CivilianId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CivilianLicences", x => x.LicenceId);
+                    table.PrimaryKey("PK_Licences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CivilianLicences_Civilians_CivilianId",
+                        name: "FK_Licences_Civilians_CivilianId",
                         column: x => x.CivilianId,
                         principalTable: "Civilians",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CivilianLicences_Licences_LicenceId",
-                        column: x => x.LicenceId,
-                        principalTable: "Licences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -450,11 +433,6 @@ namespace MDT_Romania.Data.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CivilianLicences_CivilianId",
-                table: "CivilianLicences",
-                column: "CivilianId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Civilians_AddressId",
                 table: "Civilians",
                 column: "AddressId");
@@ -468,6 +446,11 @@ namespace MDT_Romania.Data.Migrations
                 name: "IX_Crimes_CategoryId",
                 table: "Crimes",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Licences_CivilianId",
+                table: "Licences",
+                column: "CivilianId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Raports_CivilianId",
@@ -512,19 +495,16 @@ namespace MDT_Romania.Data.Migrations
                 name: "BOLOs");
 
             migrationBuilder.DropTable(
-                name: "CivilianLicences");
+                name: "CrimeRaports");
 
             migrationBuilder.DropTable(
-                name: "CrimeRaports");
+                name: "Licences");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
-
-            migrationBuilder.DropTable(
-                name: "Licences");
 
             migrationBuilder.DropTable(
                 name: "Crimes");

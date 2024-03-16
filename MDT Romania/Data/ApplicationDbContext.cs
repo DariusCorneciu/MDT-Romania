@@ -21,8 +21,6 @@ namespace MDT_Romania.Data
         public DbSet <Address> Addresses { get; set; }
         public DbSet<CrimeRaport> CrimeRaports { get; set; }
         public DbSet<Licence> Licences { get; set; }
-        public DbSet<CivilianLicence> CivilianLicences { get; set; }
-
         protected override void OnModelCreating(ModelBuilder
 modelBuilder)
         {
@@ -43,22 +41,10 @@ modelBuilder)
             .HasOne(ab => ab.Crime)
             .WithMany(ab => ab.CrimeRaports)
             .HasForeignKey(ab => ab.CrimeId);
-
-            modelBuilder.Entity<CivilianLicence>()
-            .HasKey(cr => new {
-                cr.LicenceId,
-            });
-            // definire relatii cu modelele Civilian si Licence (FK)
+            
 
 
-            modelBuilder.Entity<CivilianLicence>()
-           .HasOne(ab => ab.Civilian)
-           .WithMany(ab => ab.CivilianLicence)
-           .HasForeignKey(ab => ab.CivilianId);
-            modelBuilder.Entity<CivilianLicence>()
-            .HasOne(ab => ab.Licence)
-            .WithMany(ab => ab.CivilianLicence)
-            .HasForeignKey(ab => ab.LicenceId);
+           
         }
 
        

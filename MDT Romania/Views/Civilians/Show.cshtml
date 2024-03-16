@@ -9,6 +9,24 @@
 
             <ul class="list-group  list-group-horizontal">
                 <li class="list-group-item border-0 d-flex justify-content-center align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    </svg>
+                </li>
+                <li class="list-group-item border-0">
+                    <p class="mb-1 fw-bold opacity-50">Name</p>
+
+                    <small>@Model.FirstName @Model.LastName</small>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="list-group-item ">
+
+            <ul class="list-group  list-group-horizontal">
+                <li class="list-group-item border-0 d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-person-vcard" viewBox="0 0 16 16">
                         <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
                         <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
@@ -25,17 +43,95 @@
             </div>
 
         <div class="list-group-item ">
-
             <ul class="list-group  list-group-horizontal">
                 <li class="list-group-item border-0 d-flex justify-content-center align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-card-list" viewBox="0 0 16 16">
+                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                        <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                     </svg>
                 </li>
                 <li class="list-group-item border-0">
-                    <p class="mb-1 fw-bold opacity-50">Name</p>
+                    <p class="mb-1 fw-bold opacity-50">Licences</p>
 
-                    <small>@Model.FirstName @Model.LastName</small>
+                    @if (ViewBag.DriverLicence)
+                    {
+                        <a class="btn badge text-bg-success" data-bs-toggle="modal" data-bs-target="#exampledriver">Driver Licence</a>
+
+                        <div class="modal fade" id="exampledriver" tabindex="-1" aria-labelledby="exampledriverLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampledriverLabel">What do you want to do?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    
+                                    <div class="modal-body d-flex justify-content-center align-content-center gap-3">
+                                        <form method="post" action="/Licences/Delete?civilianid=@Model.Id&permittype=0">
+                                            <button type="submit" class="btn btn-outline-danger">Revoke Licence</button>
+                                        </form>
+                                       
+                                        <button type="button" class="btn btn-outline-primary">Show All Vehicle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    }else{
+                        <a href="/Licences/New?civilianid=@Model.Id&permittype=0" class="btn badge text-bg-danger" >Driver Licence</a>
+                    }
+                    @if (ViewBag.Flying)
+                    {
+                        <a class="btn badge text-bg-success" data-bs-toggle="modal" data-bs-target="#flyModal">Flying Licence</a>
+
+                        <div class="modal fade" id="flyModal" tabindex="-1" aria-labelledby="flyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampledriverLabel">What do you want to do?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body d-flex justify-content-center align-content-center gap-3">
+                                        <form method="post" action="/Licences/Delete?civilianid=@Model.Id&permittype=1">
+                                            <button type="submit" class="btn btn-outline-danger">Revoke Licence</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }else{
+                        <a  href="/Licences/New?civilianid=@Model.Id&permittype=1" class="btn badge text-bg-danger">Flying Licence</a>
+                    }
+                    @if (ViewBag.Gun)
+                    {
+                        <a class="btn badge text-bg-success" data-bs-toggle="modal" data-bs-target="#gunModal">Gun Permit</a>
+
+                        <div class="modal fade" id="gunModal" tabindex="-1" aria-labelledby="gunModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampledriverLabel">What do you want to do?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body d-flex justify-content-center align-content-center gap-3">
+                                        <form method="post" action="/Licences/Delete?civilianid=@Model.Id&permittype=2">
+                                            <button type="submit" class="btn btn-outline-danger">Revoke Licence</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }else{
+                        <a href="/Licences/New?civilianid=@Model.Id&permittype=2" class="btn badge text-bg-danger">Gun Permit</a>
+
+
+                    }
+                   
                 </li>
 
             </ul>
