@@ -3,6 +3,8 @@
 - MDT (Mobile Data Terminal) is a database used by American officers to access information and criminal records about individuals present during traffic stops. 
 ## 📠Technologies
 - ASP.Net Core
+- Bootstrap
+- Chart.js
 - Entity Framework Core
 - Identity Framework
 - HTML/CSS/JavaScript
