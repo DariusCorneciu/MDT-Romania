@@ -175,6 +175,41 @@ namespace MDT_Romania.Models
                     context.SaveChanges();
 
                 }
+                if (!context.VehicleModels.Any())
+                {
+                    context.VehicleModels.AddRange(
+                        new VehicleModel { ModelName="BMW",ModelType="Seria 1 F20"},
+                        new VehicleModel { ModelName = "BMW", ModelType = "Seria 3 F30" },
+                        new VehicleModel { ModelName = "BMW", ModelType = "X3" },
+                        new VehicleModel { ModelName = "BMW", ModelType = "X5" },
+                        new VehicleModel { ModelName = "Mercedes-Benz", ModelType = "C Class" },
+                        new VehicleModel { ModelName = "Mercedes-Benz", ModelType = "E Class" },
+                        new VehicleModel { ModelName = "Mercedes-Benz", ModelType = "A Class" },
+                        new VehicleModel { ModelName = "Mercedes-Benz", ModelType = "S Class" },
+                        new VehicleModel { ModelName = "Mercedes-Benz", ModelType = "GLC" },
+                        new VehicleModel { ModelName = "Audi", ModelType = "A3" },
+                        new VehicleModel { ModelName = "Audi", ModelType = "A4" },
+                        new VehicleModel { ModelName = "Audi", ModelType = "A6" },
+                        new VehicleModel { ModelName = "Audi", ModelType = "Q5" },
+                        new VehicleModel { ModelName = "Toyota", ModelType = "Supra" },
+                        new VehicleModel { ModelName = "Toyota", ModelType = "Corolla" },
+                        new VehicleModel { ModelName = "Toyota", ModelType = "Prius" },
+                        new VehicleModel { ModelName = "Ford", ModelType = "Focus" },
+                        new VehicleModel { ModelName = "Ford", ModelType = "Fiesta" },
+                        new VehicleModel { ModelName = "Ford", ModelType = "Explorer" },
+                        new VehicleModel { ModelName = "Volkswagen", ModelType = "Golf" },
+                        new VehicleModel { ModelName = "Volkswagen", ModelType = "Passat" },
+                        new VehicleModel { ModelName = "Volkswagen", ModelType = "Touareg" },
+                        new VehicleModel { ModelName = "Dacia", ModelType = "Logan" },
+                        new VehicleModel { ModelName = "Dacia", ModelType = "Sandero" },
+                        new VehicleModel { ModelName = "Dacia", ModelType = "Duster" },
+                        new VehicleModel { ModelName = "Honda", ModelType = "Civic" },
+                        new VehicleModel { ModelName = "Honda", ModelType = "CR-V" },
+                        new VehicleModel { ModelName = "Honda", ModelType = "Pilot" }
+
+                        );
+
+                }
                 if (context.Roles.Any())
                 {
                     return;   // baza de date contine deja roluri

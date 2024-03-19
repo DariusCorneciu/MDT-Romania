@@ -351,11 +351,11 @@ namespace MDT_Romania.Migrations
                     b.Property<int>("CivilianId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LicensePlate")
+                    b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

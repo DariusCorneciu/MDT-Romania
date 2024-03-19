@@ -1,0 +1,51 @@
+﻿@model MDT_Romania.Models.Civilian
+<div class="veh-grid">
+
+    <div class="personal d-flex flex-column justify-content-center align-items-center">
+        <img src="@Model.ImageSource()" class="img-fluid mb-4 w-75" alt="...">
+        <a href="/Civilians/Show/@Model.Id" class=" btn card convic overflow-auto w-75 bg-body-secondary gap-0" style="width: 50rem; height:5rem;font-size:1rem">
+            <p class="card-text m-0" style="font-size:10px">Civilian Name</p>
+
+            <p class="card-text">@Model.FirstName @Model.LastName</p>
+        </a>
+        <a href="/Vehicles/New/@Model.Id" class="btn badge text-bg-primary mt-2"">Add new vehicle</a>
+
+    </div>
+
+    <div class="vehlist  gap-1">
+        @if (ViewBag.personalVehicle != null)
+        {
+            <table class="table table-responsive text-center table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Licence Plate</th>
+                        <th scope="col" colspan="2">Vehicle Model</th>
+                        <th scope="col">Vehicle Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (MDT_Romania.Models.Vehicle veh in ViewBag.personalVehicle)
+                    {
+                        <tr onclick="location.href='/Vehicle/Edit/@veh.Id'" style="cursor: pointer;">
+
+                            <th scope="row">@veh.LicensePlate</th>
+                            <td colspan="2">@veh.Model.ModelName @veh.Model.ModelType</td>
+                            <td><div class="p-1 rounded-2 border" style="background-color:@veh.Color ">&nbsp;</div></td>
+                        </tr>
+                    }
+               </tbody>
+            </table>
+        }
+        else
+        {
+            <p>@Model.FirstName @Model.LastName doesen't have any personal vehicle.</p>
+            
+        }
+    </div>
+
+  
+
+
+</div>
+

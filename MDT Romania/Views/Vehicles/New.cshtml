@@ -1,0 +1,34 @@
+﻿@model MDT_Romania.Models.Vehicle
+
+
+
+
+
+<form method="post" action="/Vehicles/New" enctype="multipart/form-data">
+
+    <input type="hidden" name="CivilianId" value="@Model.CivilianId" />
+    <div data-mdb-input-init class="form-outline">
+        @Html.ValidationMessage("LicensePlate", null, new { @class = "text-danger" })
+        <input type="text" id="form6Example1" class="form-control" name="LicensePlate" value="@Model.LicensePlate" />
+        <label class="form-label" for="form6Example1">Licence Plate</label>
+
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        <label for="exampleColorInput" class="form-label">Color picker</label>
+        <input type="color" class="form-control form-control-color" name="Color" id="exampleColorInput" value="@Model.Color" title="Choose your color">
+    </div>
+    
+    <div data-mdb-input-init class="form-outline mb-4">
+        @Html.ValidationMessage("VehicleModelId", null, new { @class = "text-danger" })
+        <select class="form-select" id="inlineFormSelectPref" name="VehicleModelId">
+            <option selected value=NULL>Vehicle Model</option>
+            @if (Model.VehicleModels != null)
+            {
+                @foreach (var mod in Model.VehicleModels)
+                {
+                    <option value="@mod.Value"> @mod.Text </option>
+                }}
+        </select>
+    </div>
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Add Vehicle</button>
+</form>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MDT_Romania.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240315131252_Db")]
+    [Migration("20240319081946_Db")]
     partial class Db
     {
         /// <inheritdoc />
@@ -354,11 +354,11 @@ namespace MDT_Romania.Migrations
                     b.Property<int>("CivilianId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LicensePlate")
+                    b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

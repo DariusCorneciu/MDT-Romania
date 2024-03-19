@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Views\BOLOs\" />
-    <Folder Include="Views\Vehicles\" />
   </ItemGroup>
 
 </Project>
