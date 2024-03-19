@@ -31,12 +31,7 @@ html {
     grid-row: 1/2;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    
-    grid-auto-rows: minmax(100px, auto);
-}
+
 .formular-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -53,11 +48,24 @@ html {
     grid-row: 1/3;
    
 }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
 .item {
     
     padding: 20px;
     font-size: 24px;
     
+}
+.chart {
+    grid-column: 2/4;
+    grid-row: 1;
+}
+.chat {
+    grid-column: 1/2;
+    grid-row: 1/4;
 }
 .info {
     grid-row: 1/4;
@@ -627,3 +635,112 @@ input:checked + .slider {
         opacity: 1;
     }
 }
+
+
+.chat-card {
+    width: 300px;
+
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 25rem;
+    width:20rem;
+}
+.usernamechat{
+    font-size:10px;
+    color:mediumslateblue;
+}
+
+.chat-header {
+    padding: 10px;
+    
+    display: flex;
+    align-items: center;
+}
+
+    .chat-header .h2 {
+        font-size: 16px;
+        
+    }
+
+.chat-body {
+    padding: 20px;
+    height: 20rem;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+    .message div {
+        font-size: 10px;
+    }
+
+.incoming {
+   
+}
+
+.outgoing {
+    
+    text-align: right;
+}
+
+.message p {
+    font-size: 14px;
+    
+    margin: 0;
+}
+
+.chat-footer {
+    padding: 10px;
+    background-color: #f2f2f2;
+    display: flex;
+}
+
+    .chat-footer input[type="text"] {
+        flex-grow: 1;
+        padding: 5px;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .chat-footer button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #4285f4;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .chat-footer button:hover {
+            background-color: #0f9d58;
+        }
+
+@keyframes chatAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-card .message {
+    animation: chatAnimation 0.3s ease-in-out;
+    animation-fill-mode: both;
+    animation-delay: 0.1s;
+}
+
+    .chat-card .message:nth-child(even) {
+        animation-delay: 0.2s;
+    }
+
+    .chat-card .message:nth-child(odd) {
+        animation-delay: 0.3s;
+    }

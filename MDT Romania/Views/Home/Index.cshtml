@@ -1,10 +1,149 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    var labelsJson = Json.Serialize(ViewBag.Labels);
+    var warrantsJson = Json.Serialize(ViewBag.Warrants);
+    var raportsJson = Json.Serialize(ViewBag.Raports);
+  
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var chartCanvas = document.getElementById("chartjs-dashboard-line");
+        
+        var labelss = @Html.Raw(labelsJson);
+        var warrant = @Html.Raw(warrantsJson);
+
+        var raport = @Html.Raw(raportsJson);
+        if (chartCanvas) {
+            var ctx = chartCanvas.getContext("2d");
+            var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+            gradientStroke1.addColorStop(1, "rgba(203,12,159,0.2)");
+            gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
+            gradientStroke1.addColorStop(0, "rgba(203,12,159,0)"); //purple colors
+
+            var gradientStroke2 = ctx.createLinearGradient(0, 230, 0, 50);
+
+            gradientStroke2.addColorStop(1, "rgba(20,23,39,0.2)");
+            gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
+            gradientStroke2.addColorStop(0, "rgba(20,23,39,0)"); //purple colors
 
 
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labelss,
+                    datasets: [{
+                        label: "Warrants",
+                        fill: true,
+                        backgroundColor: gradientStroke1,
+                        borderColor: "#cb0c9f",
+                        data: warrant
+                    }, {
+                        label: "Raports",
+                        fill: true,
+                        backgroundColor: gradientStroke2,
+                        borderColor: "#3A416F",
+                        data: raport
+                    }
+                    
+                ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        intersect: false
+                    },
+                    hover: {
+                        intersect: true
+                    },
+                    plugins: {
+                        filler: {
+                            propagate: false
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            reverse: true,
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                stepSize: 1000
+                            },
+                            display: true,
+                            borderDash: [3, 3],
+                            gridLines: {
+                                color: "rgba(0,0,0,0.0)"
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class=" grid-container">
+
+        <div class="chart card flex-fill w-100 draggable">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Last 10 day Warrant vs Raport</h5>
+        </div>
+        <div class="card-body py-3">
+            <div class="chart chart-sm">
+                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <canvas id="chartjs-dashboard-line" class="chart-line h-100"></canvas>
+
+            </div>
+        </div>
+    </div>
+    <div class="chat">
+            <div class="chat-card bg-body-secondary">
+                <div class="chat-header bg-body-tertiary">
+                    <div class="h2">Dispatch</div>
+                </div>
+                <div class="chat-body overflow-auto">
+                    <div class="message incoming bg-primary-subtle">
+                        <div class="usernamechat fw-bold fst-italic">Admin:</div>
+                        <p>Hello, how can I assist you toay?</p>
+                    </div>
+
+                    <div class="message outgoing bg-secondary-subtle">
+                        <p>I have a question about your services.</p>
+                    </div>
+                    
+
+                </div>
+                <div class="chat-footer bg-body-tertiary">
+                    <input placeholder="Type your message" type="text">
+                    <button>Send</button>
+                </div>
+            </div>
+
+
+    </div>
+    </div>
+
+
+	
+}
+else
+{
+    <div class=" text-center">
+    <h1 >Welcome to Romanian Police MDT</h1>
+    <p >Your Essential Tool for Law Enforcement Operations</p>
+    <p >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-database" viewBox="0 0 16 16">
+            <path d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313M13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A5 5 0 0 0 13 5.698M14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A5 5 0 0 0 13 8.698m0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525" />
+        </svg>
+        Connet to acces all the information!</p>
+      </div>
+    
+}

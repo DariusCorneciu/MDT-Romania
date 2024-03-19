@@ -1,10 +1,12 @@
 ﻿using MDT_Romania.Data;
 using MDT_Romania.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MDT_Romania.Controllers
 {
+    [Authorize]
     public class AddressesController : Controller
     {
         private readonly ApplicationDbContext db;

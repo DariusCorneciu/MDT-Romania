@@ -27,7 +27,7 @@
 
                     @foreach (MDT_Romania.Models.Vehicle veh in ViewBag.personalVehicle)
                     {
-                        <tr onclick="location.href='/Vehicle/Edit/@veh.Id'" style="cursor: pointer;">
+                        <tr onclick="location.href='/Vehicles/Edit/@veh.Id'" style="cursor: pointer;">
 
                             <th scope="row">@veh.LicensePlate</th>
                             <td colspan="2">@veh.Model.ModelName @veh.Model.ModelType</td>

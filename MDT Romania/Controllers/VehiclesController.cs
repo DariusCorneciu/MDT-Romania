@@ -26,10 +26,7 @@ namespace MDT_Romania.Controllers
             _roleManager = roleManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         public IActionResult Personal(int id)
         {
             Civilian personal = db.Civilians.Where(c => c.Id == id).First();
@@ -52,6 +49,30 @@ namespace MDT_Romania.Controllers
                 db.Vehicles.Add(newveh);
                 db.SaveChanges();
                 return Redirect("/Vehicles/Personal/"+newveh.CivilianId);
+            }
+            else
+            {
+                newveh.VehicleModels = GetAllModels();
+                return View(newveh);
+            }
+        }
+        public IActionResult Edit(int id)
+        {
+            Vehicle vehicle = db.Vehicles.Find(id);
+            vehicle.VehicleModels = GetAllModels();
+            return View(vehicle);
+        }
+        [HttpPost]
+        public IActionResult Edit(int id,Vehicle newveh)
+        {
+            Vehicle veh = db.Vehicles.Find(id);
+            if (ModelState.IsValid)
+            {
+                veh.Color = newveh.Color;
+                veh.VehicleModelId = newveh.VehicleModelId;
+                veh.LicensePlate = newveh.LicensePlate;
+                db.SaveChanges();
+                return Redirect("/Vehicles/Personal/" + veh.CivilianId);
             }
             else
             {
