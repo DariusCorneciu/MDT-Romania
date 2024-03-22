@@ -17,7 +17,8 @@ namespace MDT_Romania.Data
         public DbSet<BOLO> BOLOs { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Crime> Crimes { get; set; }
-        public DbSet<VehicleModel> VehicleModels { get; set; }
+        public DbSet<Message> Messages { get; set; }
+    public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet <Address> Addresses { get; set; }
         public DbSet<CrimeRaport> CrimeRaports { get; set; }
         public DbSet<Licence> Licences { get; set; }

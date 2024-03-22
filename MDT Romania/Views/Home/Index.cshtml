@@ -110,21 +110,35 @@
                     <div class="h2">Dispatch</div>
                 </div>
                 <div class="chat-body overflow-auto">
-                    <div class="message incoming bg-primary-subtle">
-                        <div class="usernamechat fw-bold fst-italic">Admin:</div>
-                        <p>Hello, how can I assist you toay?</p>
-                    </div>
+                    @if(ViewBag.Messages != null)
+                    {
+                        @foreach (MDT_Romania.Models.Message mesaj in ViewBag.Messages)
+                        {
+                            if (mesaj.UserId == ViewBag.CurrentUser)
+                            {
+                                <div class="message outgoing bg-secondary-subtle">
+                                    <p>@mesaj.Text</p>
+                                </div>
 
-                    <div class="message outgoing bg-secondary-subtle">
-                        <p>I have a question about your services.</p>
-                    </div>
-                    
+                            }
+                            else
+                            {
+                                <div class="message incoming bg-primary-subtle">
+                                    <div class="usernamechat fw-bold fst-italic">@mesaj.User.FirstName @mesaj.User.LastName:</div>
+                                    <p>@mesaj.Text</p>
+                                </div>
 
+                            }
+                        }
+                    }
+                
                 </div>
+                <form method ="post" action="/Home/Index">
                 <div class="chat-footer bg-body-tertiary">
-                    <input placeholder="Type your message" type="text">
+                    <input name="Text" placeholder="Type your message" type="text">
                     <button>Send</button>
                 </div>
+                </form>
             </div>
 
 

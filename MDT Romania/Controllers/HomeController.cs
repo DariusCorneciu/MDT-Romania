@@ -2,6 +2,7 @@ using MDT_Romania.Data;
 using MDT_Romania.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace MDT_Romania.Controllers
@@ -13,6 +14,7 @@ namespace MDT_Romania.Controllers
         private readonly ApplicationDbContext db;
 
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _siginManager;
 
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<HomeController> _logger;
@@ -20,12 +22,14 @@ namespace MDT_Romania.Controllers
         public HomeController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ILogger<HomeController> logger)
             
         {
             db = context;
             _logger = logger;
+            _siginManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -38,6 +42,7 @@ namespace MDT_Romania.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                //chart
                 var dayone = DateTime.Now.Date.AddDays(-9);
                 String[] labels = new String[10];
                 var raports = db.Raports.Where(r => r.Date >= dayone);
@@ -56,9 +61,28 @@ namespace MDT_Romania.Controllers
                 ViewBag.Warrants = warrants;
                 ViewBag.Raports = raport;
 
-
+                //dispatch
+                ViewBag.CurrentUser = _userManager.GetUserId(User);
+                ViewBag.Messages = db.Messages.Include(u=>u.User);
+                // next, acum luam numele tuturor persoanelor conectate si le afisam avand statusul on-duty
+                
             }
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(Message newmessage)
+        {
+            newmessage.UserId = _userManager.GetUserId(User);
+            newmessage.Data = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.Messages.Add(newmessage);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+
         }
 
         public IActionResult Privacy()
