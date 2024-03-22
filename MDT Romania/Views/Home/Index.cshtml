@@ -86,6 +86,15 @@
             });
         }
     });
+
+    function scrollToBottom() {
+        var messagesContainer = document.getElementById('messagesContainer');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        scrollToBottom();
+    });
 </script>
 
 @if (User.Identity.IsAuthenticated)
@@ -109,7 +118,7 @@
                 <div class="chat-header bg-body-tertiary">
                     <div class="h2">Dispatch</div>
                 </div>
-                <div class="chat-body overflow-auto">
+                <div id="messagesContainer" class="chat-body overflow-auto">
                     @if(ViewBag.Messages != null)
                     {
                         @foreach (MDT_Romania.Models.Message mesaj in ViewBag.Messages)

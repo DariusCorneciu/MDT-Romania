@@ -1,3 +1,4 @@
+using MDT_Romania;
 using MDT_Romania.Data;
 using MDT_Romania.Models;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +47,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseUserMessageMiddleware();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

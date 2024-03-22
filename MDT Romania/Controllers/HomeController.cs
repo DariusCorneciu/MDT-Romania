@@ -63,7 +63,7 @@ namespace MDT_Romania.Controllers
 
                 //dispatch
                 ViewBag.CurrentUser = _userManager.GetUserId(User);
-                ViewBag.Messages = db.Messages.Include(u=>u.User);
+                ViewBag.Messages = db.Messages.Include(u=>u.User).ToList();
                 // next, acum luam numele tuturor persoanelor conectate si le afisam avand statusul on-duty
                 
             }
@@ -81,7 +81,7 @@ namespace MDT_Romania.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction("Index");
 
         }
 
