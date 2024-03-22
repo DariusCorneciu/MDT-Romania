@@ -21,6 +21,7 @@
 - Civilian profile containing all convictions that this individual has and the total number of convictions
 - If the address does not exist you can add it (in the select option there is a button Add Address..)
 - You can view all personal vehicles(Licence Plate, Vehicle Model, Color) of a person and add a new one
+- Dispatch System(Not in real time 😥)
 
 
 ## 📜I tried to create a Romanian version of that, and this is the resources I used.
